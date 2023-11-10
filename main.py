@@ -53,3 +53,27 @@ def create_user(user: User):
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
+
+
+
+# Rota para login 
+#post
+# precisa de cpf e senha post
+
+
+
+
+
+
+
+# Rota para cadastrar serviço 
+#post
+# nome do serviço, autor, preco, descrição
+
+
+
+
+
+
+# Rota para listar serviço
+# Get
