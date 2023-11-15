@@ -1,10 +1,9 @@
 from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import text
-
+from pydantic import BaseModel
 
 app = FastAPI()
 
@@ -25,16 +24,19 @@ class UserDB(Base):
 Base.metadata.create_all(bind=engine)
 
 # Modelo de dados para o usuário
-class User(BaseModel):
+class UserCreate(BaseModel):
     nome: str
+    cpf: str
+    senha: str
+
+class UserLogin(BaseModel):
     cpf: str
     senha: str
 
 # Rota para criar um novo usuário
 @app.post("/cadastrar_usuario/")
-def create_user(user: User):
+def create_user(user: UserCreate):
     # Verifique se o CPF já está em uso
-
     with engine.connect() as conn:
         existing_user = conn.execute(text(f"SELECT cpf FROM usuarios WHERE cpf = '{user.cpf}'")).first()
     if existing_user:
@@ -50,30 +52,17 @@ def create_user(user: User):
 
     return {"Mensagem": "Usuário cadastrado com sucesso"}
 
+# Rota para fazer o login
+@app.post("/login/")
+def login(user: UserLogin):
+    with engine.connect() as conn:
+        user_db = conn.execute(text(f"SELECT * FROM usuarios WHERE cpf = '{user.cpf}'")).first()
+
+    if user_db is not None and user_db[3] == user.senha:
+        return {"Mensagem": "Login bem-sucedido"}
+    else:
+        raise HTTPException(status_code=401, detail="Usuário não encontrado ou senha incorreta")
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
-
-
-
-# Rota para login 
-#post
-# precisa de cpf e senha post
-
-
-
-
-
-
-
-# Rota para cadastrar serviço 
-#post
-# nome do serviço, autor, preco, descrição
-
-
-
-
-
-
-# Rota para listar serviço
-# Get
