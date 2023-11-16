@@ -4,8 +4,23 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import text
 from pydantic import BaseModel
+from fastapi import FastAPI, WebSocket
+from fastapi.responses import HTMLResponse
+from typing import Annotated
+
+from fastapi import (
+    Cookie,
+    Depends,
+    FastAPI,
+    Query,
+    WebSocket,
+    WebSocketException,
+    status,
+)
 
 app = FastAPI()
+
+#######################
 
 # Configuração da conexão com o banco de dados MySQL
 DATABASE_URL = "mysql+mysqlconnector://root:@127.0.0.1:3306/db_ajuda_ai"
