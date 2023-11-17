@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-TMw1P8dgc3Pp5IjPEx0oKdvtDnpedOTfbY+3qRHJ9M7zF3Nu/aT9wCAt/3vF8UE5" crossorigin="anonymous">
+    <title>Login e Cadastro</title>
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Cadastro</h2>
+            <form action="/cadastrar_usuario/" method="post">
+                <div class="mb-3">
+                    <label for="nome" class="form-label">Nome</label>
+                    <input type="text" class="form-control" id="nome" name="nome" required>
+                </div>
+                <div class="mb-3">
+                    <label for="cpf" class="form-label">CPF</label>
+                    <input type="text" class="form-control" id="cpf" name="cpf" required>
+                </div>
+                <div class="mb-3">
+                    <label for="senha" class="form-label">Senha</label>
+                    <input type="password" class="form-control" id="senha" name="senha" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Cadastrar</button>
+            </form>
+        </div>
+
+        <div class="col-md-6">
+            <h2>Login</h2>
+            <form action="/login/" method="post">
+                <div class="mb-3">
+                    <label for="login-cpf" class="form-label">CPF</label>
+                    <input type="text" class="form-control" id="login-cpf" name="cpf" required>
+                </div>
+                <div class="mb-3">
+                    <label for="login-senha" class="form-label">Senha</label>
+                    <input type="password" class="form-control" id="login-senha" name="senha" required>
+                </div>
+                <button type="submit" class="btn btn-success">Login</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-d6hGw1RAFqzJcPJs/rb8AJmAKKJhL6eSbQFOL3uA9vNAnlqrq9ff0EIdgOACcYp4" crossorigin="anonymous"></script>
+</body>
+</html>
